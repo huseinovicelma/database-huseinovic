@@ -156,49 +156,6 @@
 					"response": []
 				},
 				{
-					"name": "ottieniabbonamentiperutente",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/abbonamenti/utente/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"abbonamenti",
-								"utente",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "abbonamentiAttivi",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/abbonamenti/attivi",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"abbonamenti",
-								"attivi"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "nuovoAbbonamento",
 					"request": {
 						"method": "POST",
@@ -222,6 +179,49 @@
 							"path": [
 								"api",
 								"abbonamenti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ottieniabbonamentiperutente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/abbonamenti/utente/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"abbonamenti",
+								"utente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "abbonamentiAttivi",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/abbonamenti/attivi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"abbonamenti",
+								"attivi"
 							]
 						}
 					},
