@@ -23,3 +23,4 @@ BEGIN
     RETURN v_postiDisponibili;
 END $$
 DELIMITER ;
+

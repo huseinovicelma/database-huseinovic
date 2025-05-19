@@ -1,0 +1,450 @@
+{
+	"info": {
+		"_postman_id": "9b0f5539-72bb-439a-b02d-bcd06325e123",
+		"name": "gestioneTeatro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40344453"
+	},
+	"item": [
+		{
+			"name": "Utenti",
+			"item": [
+				{
+					"name": "ottieniUtenti",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/utenti",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"utenti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nuovoUtente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Mario\",\n  \"cognome\": \"Rossi\",\n  \"email\": \"mario.rossi@esempio.it\",\n  \"telefono\": \"3331234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/utenti",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"utenti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aggiornaUtente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Marioo\",\n  \"cognome\": \"Rossi\",\n  \"email\": \"mario.rossi@esempio.it\",\n  \"telefono\": \"3339876543\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/utenti/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"utenti",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "utenteSpecifico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/utenti/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"utenti",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/utenti/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"utenti",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Abbonamenti",
+			"item": [
+				{
+					"name": "ottieniAbbonamenti",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/abbonamenti",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"abbonamenti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ottieniabbonamentiperutente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/abbonamenti/utente/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"abbonamenti",
+								"utente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "abbonamentiAttivi",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/abbonamenti/attivi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"abbonamenti",
+								"attivi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nuovoAbbonamento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idUtente\": 2,\n  \"tipo\": \"Mensile\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/abbonamenti",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"abbonamenti"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Spettacoli",
+			"item": [
+				{
+					"name": "mostraSpettacoli",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/spettacoli",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"spettacoli"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mostraSpettacoliperData",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/spettacoli/data/2023-12-15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"spettacoli",
+								"data",
+								"2023-12-15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ottieniSpettacoloConID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/spettacoli/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"spettacoli",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postiPerSpettacolo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/spettacoli/1/posti-disponibili",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"spettacoli",
+								"1",
+								"posti-disponibili"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "nuovoSpettacolo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idCompagnia\": 1,\n  \"titolo\": \"Amleto\",\n  \"genere\": \"Tragedia\",\n  \"durata\": 120,\n  \"idSala\": 1,\n  \"dataOra\": \"2025-12-25 20:30:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/spettacoli",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"spettacoli"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "biglietti",
+			"item": [
+				{
+					"name": "ottieniBiglietti",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/biglietti",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"biglietti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BigliettiPerUtente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/biglietti/utente/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"biglietti",
+								"utente",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BigliettiPerSpettacolo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/biglietti/spettacolo/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"biglietti",
+								"spettacolo",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NuovoBiglietto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idUtente\": 2,\n  \"idSpettacolo\": 1,\n  \"idPosto\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/biglietti",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"biglietti"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

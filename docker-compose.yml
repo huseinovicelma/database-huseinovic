@@ -1,0 +1,35 @@
+services:
+  dbproject-huseinovic:
+    container_name: dbproject-huseinovic
+    build: .
+    command: node app.js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/usr/src/app
+      - /usr/src/app/node_modules
+      - /etc/localtime:/etc/localtime:ro 
+      - /etc/timezone:/etc/timezone:ro  
+    # Rimuovi la sezione devices qui sotto
+    # devices:
+    #   - /dev/rtc:/dev/rtc:ro 
+    env_file:
+      - ./app/.env
+    depends_on:
+      - mysql-db-huseinovic
+
+  mysql-db-huseinovic:
+    container_name: mysql-db-huseinovic
+    image: mysql:8.0    
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./app/config/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    env_file:
+      - ./app/.env
+
+volumes:
+  db_data:

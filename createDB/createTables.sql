@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS Posto (
     tipo INT(11) NOT NULL,
     sala INT(11) NOT NULL,
     PRIMARY KEY (idPosto),
-    FOREIGN KEY (Sala) REFERENCES Sala(numeroSala),
-    FOREIGN KEY (codiceTipo) REFERENCES TipoPosto(codiceTipo)
+    FOREIGN KEY (sala) REFERENCES Sala(numeroSala),
+    FOREIGN KEY (tipo) REFERENCES TipoPosto(codiceTipo)
 );
 
 CREATE TABLE IF NOT EXISTS TipoPosto (
