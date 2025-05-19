@@ -34,6 +34,7 @@ Per testare le API puoi utilizzare Postman . Nella repository è già presente u
 
 - Importa la collezione in Postman
 - Troverai tutte le richieste già pronte per l’uso
+
 Le API principali disponibili:
 
 - Utenti : creazione, modifica, visualizzazione, eliminazione
@@ -46,6 +47,7 @@ Le API principali disponibili:
 - app/config/init.sql - Script di inizializzazione del database MySQL (tabelle, dati di esempio, stored procedure, trigger)
 - docker-compose.yml - Configurazione dei container Docker
 - gestioneTeatro.postman_collection.json - Collezione Postman per testare le API
+- createDB - contiene il codice per la creazione del database, è indipendetente dal progetto con Node.js
 
 ## Note
 - Non è presente un frontend: il progetto si concentra sull’implementazione e la gestione del database e delle API RESTful.
