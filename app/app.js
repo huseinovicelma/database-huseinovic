@@ -17,18 +17,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Test della connessione al database
-app.get('/test-db', async (req, res) => {
-  try {
-    const db = await connectToDatabase();
-    await db.query('SELECT 1');
-    res.status(200).json({ message: 'Connessione al database riuscita!' });
-  } catch (error) {
-    console.error('Errore di connessione al database:', error);
-    res.status(500).json({ error: 'Errore di connessione al database' });
-  }
-});
-
 // Routes
 app.use('/api/utenti', utentiRoutes);
 app.use('/api/spettacoli', spettacoliRoutes);

@@ -58,7 +58,7 @@ router.get('/spettacolo/:id', async (req, res) => {
   }
 });
 
-// POST nuovo biglietto (usando stored procedure)
+// POST nuovo biglietto 
 router.post('/', async (req, res) => {
   const { idUtente, idSpettacolo, idPosto } = req.body;
   

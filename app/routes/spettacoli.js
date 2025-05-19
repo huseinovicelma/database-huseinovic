@@ -67,7 +67,18 @@ router.get('/:id/posti-disponibili', async (req, res) => {
   }
 });
 
-// POST nuovo spettacolo (usando stored procedure)
+router.get('/:id/numero-posti-liberi', async (req, res) => {
+  try {
+    const db = await connectToDatabase();
+    const [result] = await db.query('SELECT fn_contaPostiDisponibili(?) AS postiLiberi', [req.params.id]);
+    res.status(200).json({ postiLiberi: result[0].postiLiberi });
+  } catch (error) {
+    console.error('Errore nel conteggio dei posti liberi:', error);
+    res.status(500).json({ error: 'Errore nel conteggio dei posti liberi' });
+  }
+});
+
+// POST nuovo spettacolo 
 router.post('/', async (req, res) => {
   const { idCompagnia, titolo, genere, durata, idSala, dataOra } = req.body;
   

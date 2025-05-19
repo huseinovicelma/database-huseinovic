@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST nuovo utente (usando stored procedure)
+// POST nuovo utente
 router.post('/', async (req, res) => {
   const { nome, cognome, email, telefono } = req.body;
   
@@ -45,9 +45,6 @@ router.post('/', async (req, res) => {
     res.status(201).json({ message: 'Utente creato con successo' });
   } catch (error) {
     console.error('Errore nella creazione dell\'utente:', error);
-    if (error.message.includes('Email già esistente')) {
-      return res.status(400).json({ error: 'Email già esistente' });
-    }
     res.status(500).json({ error: 'Errore nella creazione dell\'utente' });
   }
 });

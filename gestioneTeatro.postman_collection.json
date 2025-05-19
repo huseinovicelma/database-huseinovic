@@ -345,6 +345,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Contaposti",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/spettacoli/1/numero-posti-liberi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"spettacoli",
+								"1",
+								"numero-posti-liberi"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

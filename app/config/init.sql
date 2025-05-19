@@ -215,16 +215,10 @@ CREATE PROCEDURE sp_inserisciUtente(
     IN p_telefono VARCHAR(15)
 ) 
 BEGIN 
-
-    IF (SELECT COUNT(*) FROM Utente WHERE email = p_email) = 0 THEN 
-        INSERT INTO Utente (nome, cognome, email, telefono)
-        VALUES (p_nome, p_cognome, p_email, p_telefono);
-    ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email già esistente';
-    END IF;
+    INSERT INTO Utente (nome, cognome, email, telefono)
+    VALUES (p_nome, p_cognome, p_email, p_telefono);
 END $$
 DELIMITER ;
-
 
 DELIMITER $$
 CREATE PROCEDURE sp_acquistaBiglietto(

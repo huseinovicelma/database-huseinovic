@@ -9,13 +9,8 @@ CREATE PROCEDURE sp_inserisciUtente(
     IN p_telefono VARCHAR(15)
 ) 
 BEGIN 
-    --check per vedere se la mail esiste già
-    IF (SELECT COUNT(*) FROM Utente WHERE email = p_email) = 0 THEN 
-        INSERT INTO Utente (nome, cognome, email, telefono)
-        VALUES (p_nome, p_cognome, p_email, p_telefono);
-    ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Email già esistente';
-    END IF;
+    INSERT INTO Utente (nome, cognome, email, telefono)
+    VALUES (p_nome, p_cognome, p_email, p_telefono);
 END $$
 DELIMITER ;
 
@@ -177,5 +172,42 @@ BEGIN
     VALUES (p_titolo, p_genere, p_dataOra, p_durata, p_idSala, p_idCompagnia);
     
     SET p_risultato = CONCAT('Spettacolo "', p_titolo, '" programmato con successo per il ', DATE_FORMAT(p_dataOra, '%d/%m/%Y %H:%i'));
+END $$
+DELIMITER ;
+
+-- Creazione procedura per eliminare un utente
+DELIMITER $$
+CREATE PROCEDURE sp_eliminaUtente(
+    IN p_idUtente INT,
+    OUT p_risultato VARCHAR(100)
+)
+BEGIN
+    DECLARE v_countBiglietti INT DEFAULT 0;
+    DECLARE v_countAbbonamenti INT DEFAULT 0;
+    
+    -- Verifica se l'utente esiste
+    IF NOT EXISTS (SELECT 1 FROM Utente WHERE idUtente = p_idUtente) THEN
+        SET p_risultato = 'Utente non trovato';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Utente non trovato';
+    END IF;
+    
+    -- Conta i biglietti associati all'utente
+    SELECT COUNT(*) INTO v_countBiglietti FROM Biglietto WHERE utente = p_idUtente;
+    
+    -- Conta gli abbonamenti associati all'utente
+    SELECT COUNT(*) INTO v_countAbbonamenti FROM Abbonamento WHERE utente = p_idUtente;
+    
+    -- Elimina i biglietti associati all'utente
+    DELETE FROM Biglietto WHERE utente = p_idUtente;
+    
+    -- Elimina gli abbonamenti associati all'utente
+    DELETE FROM Abbonamento WHERE utente = p_idUtente;
+    
+    -- Elimina l'utente
+    DELETE FROM Utente WHERE idUtente = p_idUtente;
+    
+    SET p_risultato = CONCAT('Utente eliminato con successo. Eliminati anche ', 
+                            v_countBiglietti, ' biglietti e ', 
+                            v_countAbbonamenti, ' abbonamenti associati.');
 END $$
 DELIMITER ;
