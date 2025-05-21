@@ -7,11 +7,7 @@ router.get('/', async (req, res) => {
   try {
     const db = await connectToDatabase();
     const [spettacoli] = await db.query(`
-      SELECT s.*, sa.nome AS nomeSala, ct.nome AS nomeCompagnia 
-      FROM Spettacolo s
-      JOIN Sala sa ON s.sala = sa.numeroSala
-      JOIN CompagniaTeatrale ct ON s.compagnia = ct.idCompagnia
-      ORDER BY s.dataOra
+      SELECT * FROM v_spettacoli
     `);
     res.status(200).json(spettacoli);
   } catch (error) {

@@ -7,10 +7,7 @@ router.get('/', async (req, res) => {
   try {
     const db = await connectToDatabase();
     const [abbonamenti] = await db.query(`
-      SELECT a.*, u.nome, u.cognome
-      FROM Abbonamento a
-      JOIN Utente u ON a.utente = u.idUtente
-      ORDER BY a.dataScadenza DESC
+        SELECT * FROM v_abbonamenti
     `);
     res.status(200).json(abbonamenti);
   } catch (error) {
@@ -41,11 +38,7 @@ router.get('/attivi', async (req, res) => {
   try {
     const db = await connectToDatabase();
     const [abbonamenti] = await db.query(`
-      SELECT a.*, u.nome, u.cognome
-      FROM Abbonamento a
-      JOIN Utente u ON a.utente = u.idUtente
-      WHERE CURDATE() BETWEEN a.dataEmissione AND a.dataScadenza
-      ORDER BY a.dataScadenza
+        SELECT * FROM v_abbonamenti_attivi
     `);
     res.status(200).json(abbonamenti);
   } catch (error) {

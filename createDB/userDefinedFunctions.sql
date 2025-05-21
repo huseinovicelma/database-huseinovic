@@ -1,26 +1,26 @@
 DELIMITER $$
-CREATE FUNCTION fn_contaPostiDisponibili(p_idSpettacolo INT) 
+CREATE FUNCTION fn_contaPostiDisponibili(in_idSpettacolo INT) 
 RETURNS INT
 DETERMINISTIC
 BEGIN
-    DECLARE v_idSala INT;
-    DECLARE v_postiTotali INT;
-    DECLARE v_postiOccupati INT;
-    DECLARE v_postiDisponibili INT;
+    DECLARE idSala INT;
+    DECLARE postiTotali INT;
+    DECLARE postiOccupati INT;
+    DECLARE postiDisponibili INT;
     
-    -- Ottieni la sala dello spettacolo
-    SELECT sala INTO v_idSala FROM Spettacolo WHERE idSpettacolo = p_idSpettacolo;
     
-    -- Conta i posti totali nella sala
-    SELECT capienza INTO v_postiTotali FROM Sala WHERE numeroSala = v_idSala;
+    SELECT sala INTO idSala FROM Spettacolo WHERE idSpettacolo = in_idSpettacolo;
     
-    -- Conta i posti già occupati
-    SELECT COUNT(*) INTO v_postiOccupati FROM Biglietto WHERE spettacolo = p_idSpettacolo;
+   
+    SELECT capienza INTO postiTotali FROM Sala WHERE numeroSala = idSala;
     
-    -- Calcola i posti disponibili
-    SET v_postiDisponibili = v_postiTotali - v_postiOccupati;
     
-    RETURN v_postiDisponibili;
+    SELECT COUNT(*) INTO postiOccupati FROM Biglietto WHERE spettacolo = in_idSpettacolo;
+    
+    
+    SET postiDisponibili = postiTotali - postiOccupati;
+    
+    RETURN postiDisponibili;
 END $$
 DELIMITER ;
 

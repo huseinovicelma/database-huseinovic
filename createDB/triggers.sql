@@ -7,7 +7,7 @@ BEFORE INSERT ON Biglietto
 FOR EACH ROW
 BEGIN
     DECLARE abbonamento_valido INT DEFAULT 0;
-    DECLARE sconto DECIMAL(5,2) DEFAULT 0.40; -- Sconto fisso del 40%
+    DECLARE sconto DECIMAL(5,2) DEFAULT 0.40;
     
     SELECT COUNT(*) INTO abbonamento_valido
     FROM Abbonamento
@@ -54,13 +54,13 @@ BEGIN
     FROM Spettacolo
     WHERE sala = NEW.sala
     AND (
-        -- Verifica sovrapposizione: il nuovo spettacolo inizia durante un altro spettacolo
+        
         (NEW.dataOra BETWEEN dataOra AND ADDTIME(dataOra, durata))
         OR
-        -- Verifica sovrapposizione: il nuovo spettacolo finisce durante un altro spettacolo
+       
         (fine_spettacolo BETWEEN dataOra AND ADDTIME(dataOra, durata))
         OR
-        -- Verifica sovrapposizione: il nuovo spettacolo copre completamente un altro spettacolo
+       
         (NEW.dataOra <= dataOra AND fine_spettacolo >= ADDTIME(dataOra, durata))
     );
     

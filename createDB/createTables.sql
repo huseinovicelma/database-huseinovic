@@ -112,3 +112,31 @@ CREATE TABLE IF NOT EXISTS Artista (
     CF VARCHAR(16) NOT NULL,
     PRIMARY KEY (idArtista) 
 );
+
+CREATE OR REPLACE VIEW v_abbonamenti AS
+    SELECT a.*, u.nome, u.cognome
+    FROM Abbonamento a
+    JOIN Utente u ON a.utente = u.idUtente
+    ORDER BY a.dataScadenza DESC;
+
+CREATE OR REPLACE VIEW v_abbonamenti_attivi AS
+    SELECT a.*, u.nome, u.cognome
+    FROM Abbonamento a
+    JOIN Utente u ON a.utente = u.idUtente
+    WHERE CURDATE() BETWEEN a.dataEmissione AND a.dataScadenza
+    ORDER BY a.dataScadenza;
+
+CREATE OR REPLACE VIEW v_biglietti AS
+    SELECT b.*, u.nome, u.cognome, s.titolo, s.dataOra, p.fila, p.numero
+    FROM Biglietto b
+    JOIN Utente u ON b.utente = u.idUtente
+    JOIN Spettacolo s ON b.spettacolo = s.idSpettacolo
+    JOIN Posto p ON b.posto = p.idPosto
+    ORDER BY b.dataEmissione DESC;
+
+CREATE OR REPLACE VIEW v_spettacoli AS
+    SELECT s.*, sa.nome AS nomeSala, ct.nome AS nomeCompagnia 
+    FROM Spettacolo s
+    JOIN Sala sa ON s.sala = sa.numeroSala
+    JOIN CompagniaTeatrale ct ON s.compagnia = ct.idCompagnia
+    ORDER BY s.dataOra;
