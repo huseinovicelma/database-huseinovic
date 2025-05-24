@@ -74,28 +74,16 @@ router.put('/:id', async (req, res) => {
 
 // DELETE utente (usando stored procedure)
 router.delete('/:id', async (req, res) => {
+  const idUtente = req.params.id;
   try {
     const db = await connectToDatabase();
-    const id = req.params.id;
-    
-    // Utilizzo della stored procedure per eliminare l'utente e i suoi riferimenti
-    const [result] = await db.query('CALL sp_eliminaUtente(?, @risultato)', [id]);
-    const [output] = await db.query('SELECT @risultato as messaggio');
-    
-    if (output[0].messaggio && output[0].messaggio.includes('non trovato')) {
-      return res.status(404).json({ error: 'Utente non trovato' });
-    }
-    
-    res.status(200).json({ message: output[0].messaggio || 'Utente eliminato con successo' });
-  } catch (error) {
-    console.error('Errore nell\'eliminazione dell\'utente:', error);
-    
-    // Gestione specifica degli errori
-    if (error.message && error.message.includes('non trovato')) {
-      return res.status(404).json({ error: 'Utente non trovato' });
-    }
-    
-    res.status(500).json({ error: 'Errore nell\'eliminazione dell\'utente: ' + error.message });
+    await db.query('SET @risultato = ""');
+    await db.query('CALL sp_eliminaUtente(?, @risultato)', [idUtente]);
+    const [output] = await db.query('SELECT @risultato as risultato');
+    const risultato = output[0].risultato;
+    res.json({ risultato });
+  } catch (err) {
+    res.status(500).json({ error: err.sqlMessage });
   }
 });
 

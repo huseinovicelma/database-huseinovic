@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS Abbonamento (
     tipo VARCHAR(30) NOT NULL,
     utente INT(11) NOT NULL,
     PRIMARY KEY (codiceAbbonamento),
-    FOREIGN KEY (utente) REFERENCES Utente(idUtente)
+    FOREIGN KEY (utente) REFERENCES Utente(idUtente) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Biglietto (
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS Biglietto (
     spettacolo INT(11) NOT NULL,
     posto INT(11) NOT NULL,
     PRIMARY KEY (codiceBiglietto),
-    FOREIGN KEY (utente) REFERENCES Utente(idUtente),
+    FOREIGN KEY (utente) REFERENCES Utente(idUtente) ON DELETE CASCADE,
     FOREIGN KEY (spettacolo) REFERENCES Spettacolo(idSpettacolo),
     FOREIGN KEY (posto) REFERENCES Posto(idPosto)
 );
@@ -391,37 +391,16 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE sp_eliminaUtente(
-    IN in_idUtente INT,
+    IN in_idUtente INT(11),
     OUT risultato VARCHAR(100)
 )
 BEGIN
-    DECLARE contaBiglietti INT DEFAULT 0;
-    DECLARE contaAbbonamenti INT DEFAULT 0;
-    
-    -- Verifica se l'utente esiste
     IF NOT EXISTS (SELECT 1 FROM Utente WHERE idUtente = in_idUtente) THEN
         SET risultato = 'Utente non trovato';
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Utente non trovato';
     END IF;
-    
-    -- Conta i biglietti associati all'utente
-    SELECT COUNT(*) INTO contaBiglietti FROM Biglietto WHERE utente = in_idUtente;
-    
-    -- Conta gli abbonamenti associati all'utente
-    SELECT COUNT(*) INTO contaAbbonamenti FROM Abbonamento WHERE utente = in_idUtente;
-    
-    -- Elimina i biglietti associati all'utente
-    DELETE FROM Biglietto WHERE utente = in_idUtente;
-    
-    -- Elimina gli abbonamenti associati all'utente
-    DELETE FROM Abbonamento WHERE utente = in_idUtente;
-    
-    -- Elimina l'utente
     DELETE FROM Utente WHERE idUtente = in_idUtente;
-    
-    SET risultato = CONCAT('Utente eliminato con successo. Eliminati anche ', 
-                            contaBiglietti, ' biglietti e ', 
-                            contaAbbonamenti, ' abbonamenti associati.');
+    SET risultato = 'Utente eliminato con successo.';
 END $$
 DELIMITER ;
 
@@ -504,15 +483,11 @@ BEGIN
     DECLARE postiOccupati INT;
     DECLARE postiDisponibili INT;
     
-    
     SELECT sala INTO idSala FROM Spettacolo WHERE idSpettacolo = in_idSpettacolo;
     
-   
     SELECT capienza INTO postiTotali FROM Sala WHERE numeroSala = idSala;
     
-    
     SELECT COUNT(*) INTO postiOccupati FROM Biglietto WHERE spettacolo = in_idSpettacolo;
-    
     
     SET postiDisponibili = postiTotali - postiOccupati;
     

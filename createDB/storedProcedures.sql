@@ -166,36 +166,15 @@ DELIMITER ;
 -- Creazione procedura per eliminare un utente
 DELIMITER $$
 CREATE PROCEDURE sp_eliminaUtente(
-    IN in_idUtente INT,
+    IN in_idUtente INT(11),
     OUT risultato VARCHAR(100)
 )
 BEGIN
-    DECLARE contaBiglietti INT DEFAULT 0;
-    DECLARE contaAbbonamenti INT DEFAULT 0;
-    
-    -- Verifica se l'utente esiste
     IF NOT EXISTS (SELECT 1 FROM Utente WHERE idUtente = in_idUtente) THEN
         SET risultato = 'Utente non trovato';
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Utente non trovato';
     END IF;
-    
-    -- Conta i biglietti associati all'utente
-    SELECT COUNT(*) INTO contaBiglietti FROM Biglietto WHERE utente = in_idUtente;
-    
-    -- Conta gli abbonamenti associati all'utente
-    SELECT COUNT(*) INTO contaAbbonamenti FROM Abbonamento WHERE utente = in_idUtente;
-    
-    -- Elimina i biglietti associati all'utente
-    DELETE FROM Biglietto WHERE utente = in_idUtente;
-    
-    -- Elimina gli abbonamenti associati all'utente
-    DELETE FROM Abbonamento WHERE utente = in_idUtente;
-    
-    -- Elimina l'utente
     DELETE FROM Utente WHERE idUtente = in_idUtente;
-    
-    SET risultato = CONCAT('Utente eliminato con successo. Eliminati anche ', 
-                            contaBiglietti, ' biglietti e ', 
-                            contaAbbonamenti, ' abbonamenti associati.');
+    SET risultato = 'Utente eliminato con successo.';
 END $$
 DELIMITER ;

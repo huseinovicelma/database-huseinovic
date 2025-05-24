@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Abbonamento (
     tipo VARCHAR(30) NOT NULL,
     utente INT(11) NOT NULL,
     PRIMARY KEY (codiceAbbonamento),
-    FOREIGN KEY (utente) REFERENCES Utente(idUtente)
+    FOREIGN KEY (utente) REFERENCES Utente(idUtente) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Biglietto (
@@ -30,11 +30,10 @@ CREATE TABLE IF NOT EXISTS Biglietto (
     spettacolo INT(11) NOT NULL,
     posto INT(11) NOT NULL,
     PRIMARY KEY (codiceBiglietto),
-    FOREIGN KEY (utente) REFERENCES Utente(idUtente),
+    FOREIGN KEY (utente) REFERENCES Utente(idUtente) ON DELETE CASCADE,
     FOREIGN KEY (spettacolo) REFERENCES Spettacolo(idSpettacolo),
     FOREIGN KEY (posto) REFERENCES Posto(idPosto)
 );
-
 CREATE TABLE IF NOT EXISTS Posto (
     idPosto INT(11) NOT NULL AUTO_INCREMENT,
     fila INT(11) NOT NULL,
