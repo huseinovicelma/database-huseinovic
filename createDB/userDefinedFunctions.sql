@@ -1,7 +1,7 @@
 DELIMITER $$
 CREATE FUNCTION fn_contaPostiDisponibili(in_idSpettacolo INT) 
 RETURNS INT
-DETERMINISTIC
+NOT DETERMINISTIC
 BEGIN
     DECLARE idSala INT;
     DECLARE postiTotali INT;

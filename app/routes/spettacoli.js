@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { connectToDatabase } = require('../config/db');
 
-// GET tutti gli spettacoli
 router.get('/', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -16,7 +15,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET spettacoli per data (usando stored procedure)
 router.get('/data/:data', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -28,7 +26,6 @@ router.get('/data/:data', async (req, res) => {
   }
 });
 
-// GET spettacolo per ID
 router.get('/:id', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -51,7 +48,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// GET posti disponibili per uno spettacolo (usando stored procedure)
 router.get('/:id/posti-disponibili', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -74,7 +70,6 @@ router.get('/:id/numero-posti-liberi', async (req, res) => {
   }
 });
 
-// POST nuovo spettacolo 
 router.post('/', async (req, res) => {
   const { idCompagnia, titolo, genere, durata, idSala, dataOra } = req.body;
   

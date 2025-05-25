@@ -1,6 +1,5 @@
 USE GestioneTeatro;
 
--- Creazione procedura per inserire un nuovo utente 
 DELIMITER $$
 CREATE PROCEDURE sp_inserisciUtente(
     IN in_nome VARCHAR(30),
@@ -14,8 +13,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-
--- Creazione procedura per acquistare un biglietto 
 CREATE PROCEDURE sp_acquistaBiglietto(
     IN in_idUtente INT(11),
     IN in_idSpettacolo INT(11),
@@ -57,7 +54,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Creazione procedura per acquistare un abbonamento
 DELIMITER $$
 CREATE PROCEDURE sp_acquistaAbbonamento(
     IN in_idUtente INT(11),
@@ -93,8 +89,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-
--- Creazione procedura per visualizzare gli spettacoli della giornata
 DELIMITER $$
 CREATE PROCEDURE sp_visualizzaSpettacoliGiornata(
     IN in_data DATE
@@ -110,7 +104,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Procedura per visualizzare i posti disponibili per uno spettacolo
 DELIMITER $$
 CREATE PROCEDURE sp_visualizzaPostiDisponibili(
     IN in_idSpettacolo INT
@@ -129,7 +122,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Creazione procedura per inserire uno spettacolo 
 DELIMITER $$
 CREATE PROCEDURE sp_inserisciSpettacolo(
     IN in_idCompagnia INT(11),
@@ -163,7 +155,6 @@ BEGIN
 END $$
 DELIMITER ;
 
--- Creazione procedura per eliminare un utente
 DELIMITER $$
 CREATE PROCEDURE sp_eliminaUtente(
     IN in_idUtente INT(11),

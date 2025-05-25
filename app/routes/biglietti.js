@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { connectToDatabase } = require('../config/db');
 
-// GET tutti i biglietti
 router.get('/', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -16,7 +15,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET biglietti per utente
 router.get('/utente/:id', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -35,7 +33,6 @@ router.get('/utente/:id', async (req, res) => {
   }
 });
 
-// GET biglietti per spettacolo
 router.get('/spettacolo/:id', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -53,7 +50,6 @@ router.get('/spettacolo/:id', async (req, res) => {
   }
 });
 
-// POST nuovo biglietto 
 router.post('/', async (req, res) => {
   const { idUtente, idSpettacolo, idPosto } = req.body;
   

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { connectToDatabase } = require('../config/db');
 
-// GET tutti gli utenti
 router.get('/', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -14,7 +13,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET utente per ID
 router.get('/:id', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -31,7 +29,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST nuovo utente
 router.post('/', async (req, res) => {
   const { nome, cognome, email, telefono } = req.body;
   
@@ -49,7 +46,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT aggiorna utente
 router.put('/:id', async (req, res) => {
   const { nome, cognome, email, telefono } = req.body;
   const id = req.params.id;
@@ -72,7 +68,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE utente (usando stored procedure)
 router.delete('/:id', async (req, res) => {
   const idUtente = req.params.id;
   try {

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { connectToDatabase } = require('../config/db');
 
-// GET tutti gli abbonamenti
 router.get('/', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -16,7 +15,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET abbonamenti per utente
 router.get('/utente/:id', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -33,7 +31,6 @@ router.get('/utente/:id', async (req, res) => {
   }
 });
 
-// GET abbonamenti attivi
 router.get('/attivi', async (req, res) => {
   try {
     const db = await connectToDatabase();
@@ -47,7 +44,6 @@ router.get('/attivi', async (req, res) => {
   }
 });
 
-// POST nuovo abbonamento (usando stored procedure)
 router.post('/', async (req, res) => {
   const { idUtente, tipo } = req.body;
   
