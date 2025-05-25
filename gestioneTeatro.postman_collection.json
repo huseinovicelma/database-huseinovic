@@ -110,7 +110,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "eliminautente",
 					"request": {
 						"method": "DELETE",
 						"header": [],
